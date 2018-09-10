@@ -100,24 +100,37 @@ export default {
         servicePing() {
             // Loop over our services object (use object.keys to get an array of keys)
             Object.keys(this.services).forEach((service) => {
-                const thisService = this.services[service];
-                fetch(`${thisService.protocol}://${thisService.host}:${thisService.port}`, { mode: 'no-cors' })
-                    .then((response) => {
-                        //  If service did respond, set status to true, else set to false
-                        if (response) {
-                            thisService.status = true;
-                        } else {
+                if (service !== 'exchange') {
+                    const thisService = this.services[service];
+                
+                    fetch(`${thisService.protocol}://${thisService.host}:${thisService.port}`, { mode: 'no-cors' })
+                        .then((response) => {
+                            //  If service did respond, set status to true, else set to false
+                            if (response) {
+                                thisService.status = true;
+                            } else {
+                                thisService.status = false;
+                            }
+                        })
+                        .catch((error) => {
+                            // If service threw an error, log it and set status to false
+                            console.error(`Error connecting to ${thisService.name}: ${error}`);
                             thisService.status = false;
-                        }
-                    })
-                    .catch((error) => {
-                        // If service threw an error, log it and set status to false
-                        console.error(`Error connecting to ${thisService.name}: ${error}`);
-                        thisService.status = false;
-                    });
+                        });
+                }
             });
         },
     },
+
+    sockets: {
+        connect() {
+            this.services.exchange.status = true;
+        },
+
+        disconnect() {
+            this.services.exchange.status = false;
+        }
+    }
 };
 </script>
 

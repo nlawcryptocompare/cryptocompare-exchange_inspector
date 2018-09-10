@@ -1,10 +1,6 @@
 <template>
     <header id="top-bar">
         <img src="../assets/cc-logo.jpg" alt="CyptoCompare logo"> | Exchange Inspector
-
-        <nav>
-            <router-link to="/foo">Go to Foo!</router-link>
-        </nav>
     </header>
 </template>
 

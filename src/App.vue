@@ -2,20 +2,15 @@
   <div id="app">
     <app-header></app-header>
 
-    <router-view></router-view>
+    <home-header></home-header>
 
-    <!-- <home-header></home-header>
-
-    <data-table></data-table> -->
-
-    <!-- <exchange-data></exchange-data> -->
+    <exchange-data></exchange-data>
   </div>
 </template>
 
 <script>
 import AppHeader from './components/AppHeader.vue';
 import ExchangeData from './components/ExchangeData.vue';
-import DataTable from './components/DataTable.vue';
 import HomeHeader from './components/HomeHeader.vue';
 
 export default {
@@ -23,7 +18,6 @@ export default {
     components: {
         AppHeader,
         ExchangeData,
-        DataTable,
         HomeHeader,
     },
 };
